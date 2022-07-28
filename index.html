@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/icon.png" type="image/png">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Taskify</title>
+</head>
+<body>
+    <div id="to-do-container">
+        <div id="to-do-header">
+            <h1>T a s k i f y</h1>
+        </div>
+        <div id="to-do-create">
+            <div id="create-fst-container">
+                <div id="create-fst-inputs">
+                    <input type="text" name="to-do-title" id="create-to-do-title" placeholder="Título da tarefa">
+                    <textarea name="to-do-description" id="create-to-do-description" cols="40" rows="2" maxlength="100" placeholder="Descrição da tarefa"></textarea>
+                </div>
+            </div>
+            <div id="create-snd-container">
+                <div class="create-snd-inputs">
+                    <select name="create-to-do-select" id="create-to-do-select">
+                        <option value="" selected disabled>Categoria</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Trabalho">Trabalho</option>
+                        <option value="Escola">Escola</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+    
+                    <input type="date" name="create-to-do-date" id="create-to-do-date">
+                </div>
+                <div class="create-snd-inputs">
+                    <button id="create-to-do-btn">Salvar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="to-do-list">
+        </div>
+    </div>
+    <script type="module" src="/js/main.js"></script>
+</body>
+</html>
