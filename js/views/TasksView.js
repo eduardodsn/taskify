@@ -21,8 +21,7 @@ export default class TasksView {
                         <div class="to-do-item-fst-container">
                             <input class="to-do-item-info-title" value="${task.title}" disabled>
                             <div class="data-container">
-                                <p>Data: </p>
-                                <input type="date" class="to-do-item-info-data" value="${task.expiresAt}" disabled>
+                                <p>Data: ${formatData(task.expiresAt)}</p>
                             </div>
                         </div>
                         <div class="to-do-item-snd-container">
@@ -34,7 +33,7 @@ export default class TasksView {
                     </div>
                 </div>
                 <div class="to-do-item-body">
-                    <textarea class="to-do-item-body-description" cols="40" rows="2" maxlength="100" disabled>${task.description}</textarea>
+                    <p class="to-do-item-body-description">${task.description}</p>
                     <div class="to-do-item-body-btn">
                         <button class="to-do-item-body-btn-excluir">Excluir</button>
                         <button class="to-do-item-body-btn-editar">Editar</button>

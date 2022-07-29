@@ -177,7 +177,7 @@ body {
 }
 
 .expanded-item {
-    height: 170px;
+    height: 190px;
 }
 
 .to-do-item-header {
@@ -216,7 +216,7 @@ body {
     margin-left: 5%;
     font-size: .9rem;
     font-weight: 600;
-    color: var(--white);
+    color: var(--white) !important;
     font-family: 'Nunito', sans-serif;
 }
 
@@ -226,7 +226,7 @@ body {
     font-weight: bold;
     border: none;
     background-color: var(--dark-gray);
-    color: var(--white);
+    color: var(--white) !important;
     outline-style: none;
     font-family: 'Nunito', sans-serif;
 }
@@ -327,7 +327,6 @@ body {
     color: var(--white);
     font-size: .9rem;
     font-weight: 600;
-    color: var(--white);
     font-family: 'Nunito', sans-serif;
     background-color: var(--dark-gray);
     border: none;
@@ -336,7 +335,7 @@ body {
     resize: none;
     outline-style: none;
     overflow-y: hidden;
-    text-align: justify;
+    text-align: justify !important;
 }
 
 .casa {
@@ -425,6 +424,10 @@ body {
 @media only screen and (max-width: 600px) {
     #create-to-do-select, #create-to-do-date {
         width: 80%;
+    }
+
+    .to-do-item-body-description {
+        width: 45%;
     }
 }
 
