@@ -45,6 +45,7 @@
     <script>
         const dateInput = document.querySelector('#create-to-do-date');
         dateInput.onfocus = () => {
+            dateInput.focus();
             dateInput.type = 'date';
             dateInput.min = new Date().toISOString().split("T")[0];
         }
