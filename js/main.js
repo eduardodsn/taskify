@@ -10,14 +10,16 @@ loadCheckAction();
 
 // Create new task
 function loadCreateAction() {
-    document.querySelector('#create-to-do-btn').addEventListener('click', () => {
+    document.querySelector('#create-to-do-btn').addEventListener('click', (e) => {
+        e.preventDefault();
         const task = controller.createNewTask();
         if(task) {
             controller.addTask(task.toObject());
             controller.clearInputs();
-    
+            
             loadDeleteAction();
             loadUpdateAction();
+            loadCheckAction();
         } 
     });
 }
@@ -25,14 +27,14 @@ function loadCreateAction() {
 // Delete task
 function loadDeleteAction() {
     let deleteBtns = document.querySelectorAll('.to-do-item-body-btn-excluir');
-
+    
     deleteBtns.forEach(deleteBtn => {
         deleteBtn.onclick = () => {
             const taskId = parseInt(deleteBtn.parentElement.parentElement.parentElement.childNodes[1].value);
             controller.deleteTask(taskId);
             loadDeleteAction();
-            loadCheckAction()
             loadUpdateAction();
+            loadCheckAction();
         }
     });
 }
@@ -41,7 +43,8 @@ function loadDeleteAction() {
 function loadUpdateAction() {
     let updateBtns = document.querySelectorAll('.to-do-item-body-btn-editar');
     updateBtns.forEach(updateBtn => {
-        updateBtn.onclick = () => {
+        updateBtn.addEventListener('click', (e) => {
+            e.preventDefault()
             const taskId = parseInt(updateBtn.parentElement.parentElement.parentElement.childNodes[1].value);
             const task = controller.searchById(taskId);
 
@@ -52,11 +55,13 @@ function loadUpdateAction() {
                 updatedTask.id = taskId;
                 updatedTask.isDone = task.toObject().isDone;
                 controller.updateTask(updatedTask.toObject());
+
                 loadUpdateAction(); 
                 loadDeleteAction();
+                loadCheckAction();
             };
         }      
-    });
+    )});
 }
 
 function loadCheckAction() {

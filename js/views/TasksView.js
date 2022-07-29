@@ -19,7 +19,7 @@ export default class TasksView {
                     </div>
                     <div class="to-do-item-title">
                         <div class="to-do-item-fst-container">
-                            <input class="to-do-item-info-title" value="${task.title}" disabled>
+                            <p "to-do-item-info-title">${task.title}</p>
                             <div class="data-container">
                                 <p>Data: ${formatData(task.expiresAt)}</p>
                             </div>

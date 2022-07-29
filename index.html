@@ -30,7 +30,7 @@
                         <option value="Outros">Outros</option>
                     </select>
     
-                    <input type="text" name="create-to-do-date" id="create-to-do-date" placeholder="Data de entrega">
+                    <input type="date" name="create-to-do-date" id="create-to-do-date">
                 </div>
                 <div class="create-snd-inputs" id="create-snd-inputs-right">
                     <button class="create-to-do-btn" id="create-to-do-btn">Criar</button>
@@ -45,8 +45,6 @@
     <script>
         const dateInput = document.querySelector('#create-to-do-date');
         dateInput.onfocus = () => {
-            dateInput.focus();
-            dateInput.type = 'date';
             dateInput.min = new Date().toISOString().split("T")[0];
         }
     </script>

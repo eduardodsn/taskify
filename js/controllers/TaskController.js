@@ -72,23 +72,29 @@ export default class TaskController {
         return JSON.parse(localStorage.getItem('tasks')) || [];
     }
 
-    addTask(task) {
+    async addTask(task) {
         let tasks = this.listTasks();
 
         tasks.push(task);
         this.updateLocalStorage(tasks);
         this._taskView.updateView(tasks);
+
+        // JSON
+        await this.addTaskJSON(task);
     }
 
-    deleteTask(id) {
+    async deleteTask(id) {
         let tasks = this.listTasks();
         let updatedTasks = tasks.filter(task => parseInt(task.id) !== parseInt(id));
 
         this.updateLocalStorage(updatedTasks);
         this._taskView.updateView(this.listTasks());
+
+        // JSON
+        await this.deleteTaskJSON(id);
     }
 
-    updateTask(updatedTask) {
+    async updateTask(updatedTask) {
         let tasks = this.listTasks();
         tasks.forEach(task => {
             if(parseInt(task.id) === parseInt(updatedTask.id)) {
@@ -99,10 +105,14 @@ export default class TaskController {
                 task.isDone = updatedTask.isDone;
             }
         });
+
         this.updateLocalStorage(tasks);
         this.clearInputs();
         this.unloadTaskInfoOnContainer();
         this._taskView.updateView(tasks);
+
+        // JSON
+        await this.updateTaskJSON(updatedTask);
     }
 
     changeTaskIsDone(taskId, callback) {
@@ -133,7 +143,6 @@ export default class TaskController {
         this._inputDescription.value = '';
         this._inputCategory.childNodes[1].selected = true;
         this._inputExpiresAt.value = '';
-        this._inputExpiresAt.type = 'text';
     }
 
     loadTaskInfoOnContainer(task) {
@@ -172,5 +181,38 @@ export default class TaskController {
     updateLocalStorage(tasks) {
         localStorage.clear();
         localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    // For JSON Server purposes
+    async addTaskJSON(task){
+        delete task.id
+        console.log(JSON.stringify(task));
+        await fetch("http://localhost:3000/tasks", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(task)
+        }).then(res => res.json());
+    }
+
+    async deleteTaskJSON(id){
+        await fetch(`http://localhost:3000/tasks/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }).then(res => res.json());
+    }
+
+    async updateTaskJSON(task){
+        console.log(JSON.stringify(task));
+        await fetch("http://localhost:3000/tasks", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(task)
+        }).then(res => res.json());
     }
 }

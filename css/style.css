@@ -79,7 +79,7 @@ body {
     background-color: var(--dark-gray);
     border-left: 2px solid var(--purple);
     font-size: .9rem;
-    color: var(--white);
+    color: var(--white) !important;
     font-family: 'Nunito', sans-serif;
     padding-left: 5px;
 }
@@ -115,6 +115,14 @@ body {
     justify-content: flex-end;
     width: 50%;
     height: 30px;
+}
+
+#create-snd-inputs-left {
+    width: 60%;
+}
+
+#create-snd-inputs-right {
+    width: 40%;
 }
 
 #create-to-do-select, #create-to-do-date {
@@ -434,5 +442,9 @@ body {
 @media only screen and (max-width: 490px) {
     .to-do-item-body-btn {
         width: 50%;
+    }
+
+    #create-to-do-select, #create-to-do-date {
+        width: 100%;
     }
 }
