@@ -28,7 +28,7 @@ export default class TasksView {
                         <div class="to-do-item-snd-container">
                             <span class="${task.category.toLowerCase()}">${task.category}</span>
                             <button class="to-do-item-view-btn" title="Ver detalhes da tarefa">
-                                <img src="/assets/down-arrow.png">
+                                <img src="./assets/down-arrow.png">
                             </button>
                         </div>
                     </div>
