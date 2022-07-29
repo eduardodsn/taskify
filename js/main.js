@@ -1,51 +1,77 @@
 import TaskController from "./controllers/TaskController.js";
 
 const controller = new TaskController();
-const $ = document.querySelector.bind(document);
 
-let title = $('#create-to-do-title');
-let description = $('#create-to-do-description');
-let category = $('#create-to-do-select');
-let expiresAt = $('#create-to-do-date');
+notify();
+loadCreateAction();
+loadDeleteAction();
+loadUpdateAction();
+loadCheckAction();
 
 // Create new task
-$('#create-to-do-btn').addEventListener('click', () => {
-    const task = controller.createNewTask(title.value, description.value, category.value, expiresAt.value);
-    if(task) controller.addTask(task.toObject());
-});
+function loadCreateAction() {
+    document.querySelector('#create-to-do-btn').addEventListener('click', () => {
+        const task = controller.createNewTask();
+        if(task) {
+            controller.addTask(task.toObject());
+            controller.clearInputs();
+    
+            loadDeleteAction();
+            loadUpdateAction();
+        } 
+    });
+}
 
-let deleteBtns = document.querySelectorAll('.to-do-item-body-btn-excluir');
+// Delete task
+function loadDeleteAction() {
+    let deleteBtns = document.querySelectorAll('.to-do-item-body-btn-excluir');
 
-deleteBtns.forEach(deleteBtn => {
-    deleteBtn.addEventListener('click', () => {
-        const taskId = parseInt(deleteBtn.parentElement.parentElement.parentElement.childNodes[1].value);
-        controller.deleteTask(taskId);
-    })
-});
+    deleteBtns.forEach(deleteBtn => {
+        deleteBtn.onclick = () => {
+            const taskId = parseInt(deleteBtn.parentElement.parentElement.parentElement.childNodes[1].value);
+            controller.deleteTask(taskId);
+            loadDeleteAction();
+            loadCheckAction()
+            loadUpdateAction();
+        }
+    });
+}
 
 // Update task 
-let updateBtns = document.querySelectorAll('.to-do-item-body-btn-editar');
+function loadUpdateAction() {
+    let updateBtns = document.querySelectorAll('.to-do-item-body-btn-editar');
+    updateBtns.forEach(updateBtn => {
+        updateBtn.onclick = () => {
+            const taskId = parseInt(updateBtn.parentElement.parentElement.parentElement.childNodes[1].value);
+            const task = controller.searchById(taskId);
 
-updateBtns.forEach(updateBtn => {
-    updateBtn.addEventListener('click', () => {
-        const item = updateBtn.parentElement.parentElement.parentElement;
-        const itemBody = updateBtn.parentElement.parentElement;
-        const taskId = parseInt(updateBtn.parentElement.parentElement.parentElement.childNodes[1].value);
-        const task = controller.searchById(taskId);
-        const createContainer = $('#to-do-create');
+            controller.loadTaskInfoOnContainer(task.toObject());
 
-        title.value = task.title;
-        description.value = task.description;
-        category.value = task.category;
-        expiresAt.value = task.expiresAt;
-        window.scrollTo(0, 0);
-
-        createContainer.style.animation = 'attention 1s ease';
-        setTimeout(() => {
-            createContainer.style.animation = '';
-        }, 1000);
-
-        
+            document.querySelector('#save-to-do-btn').onclick = () => {
+                const updatedTask = controller.createNewTask();
+                updatedTask.id = taskId;
+                updatedTask.isDone = task.toObject().isDone;
+                controller.updateTask(updatedTask.toObject());
+                loadUpdateAction(); 
+                loadDeleteAction();
+            };
+        }      
     });
-})
+}
 
+function loadCheckAction() {
+    let checks = document.querySelectorAll('.control-indicator');
+
+    checks.forEach(check => {
+        check.onclick = () => {
+            const taskId = parseInt(check.parentElement.parentElement.parentElement.parentElement.childNodes[1].value);
+            controller.changeTaskIsDone(taskId, loadCheckAction);
+            loadUpdateAction();
+            loadDeleteAction();   
+        }
+    })
+}
+
+function notify() {
+    controller.notify();
+}

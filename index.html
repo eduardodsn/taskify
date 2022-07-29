@@ -16,12 +16,12 @@
         <div id="to-do-create">
             <div id="create-fst-container">
                 <div id="create-fst-inputs">
-                    <input type="text" name="to-do-title" id="create-to-do-title" placeholder="Título da tarefa">
+                    <input type="text" name="to-do-title" id="create-to-do-title" placeholder="Título da tarefa" required>
                     <textarea name="to-do-description" id="create-to-do-description" cols="40" rows="2" maxlength="100" placeholder="Descrição da tarefa"></textarea>
                 </div>
             </div>
             <div id="create-snd-container">
-                <div class="create-snd-inputs">
+                <div class="create-snd-inputs" id="create-snd-inputs-left">
                     <select name="create-to-do-select" id="create-to-do-select">
                         <option value="" selected disabled>Categoria</option>
                         <option value="Casa">Casa</option>
@@ -30,10 +30,11 @@
                         <option value="Outros">Outros</option>
                     </select>
     
-                    <input type="date" name="create-to-do-date" id="create-to-do-date">
+                    <input type="text" name="create-to-do-date" id="create-to-do-date" placeholder="Data de entrega">
                 </div>
-                <div class="create-snd-inputs">
-                    <button id="create-to-do-btn">Salvar</button>
+                <div class="create-snd-inputs" id="create-snd-inputs-right">
+                    <button class="create-to-do-btn" id="create-to-do-btn">Criar</button>
+                    <button class="create-to-do-btn" id="save-to-do-btn">Salvar</button>
                 </div>
             </div>
         </div>
@@ -41,6 +42,13 @@
         <div id="to-do-list">
         </div>
     </div>
+    <script>
+        const dateInput = document.querySelector('#create-to-do-date');
+        dateInput.onfocus = () => {
+            dateInput.type = 'date';
+            dateInput.min = new Date().toISOString().split("T")[0];
+        }
+    </script>
     <script type="module" src="/js/main.js"></script>
 </body>
 </html>

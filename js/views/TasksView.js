@@ -13,7 +13,7 @@ export default class TasksView {
                 <div class="to-do-item-header">
                     <div class="to-do-item-status">
                         <label for="checkbox-${task.id}" title="Concluir tarefa">
-                            <input type="checkbox" name="checkbox-${task.id}" id="checkbox-${task.id}">
+                            <input type="checkbox" name="checkbox-${task.id}" id="checkbox-${task.id}" ${task.isDone ? 'checked' : ''}>
                             <div class="control-indicator"></div>
                         </label>
                     </div>

@@ -1,5 +1,0 @@
-#24273D - cinza claro;
-#171723 - cinza escuro;
-#6C63FF - roxo
-#C6CCD2 - cinza
-#FFF - branco

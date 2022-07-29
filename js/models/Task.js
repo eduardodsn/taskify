@@ -1,11 +1,23 @@
 export default class Task {
-    constructor(id, title, description, category, expiresAt) {
+    constructor(id, title, description, category, expiresAt, isDone) {
         this._id = id;
         this._title = title;
         this._description = description;
         this._category = category;
         this._expiresAt = expiresAt;
-        this._isDone = false;
+        this._isDone = isDone;
+    }
+
+    set id(id) {
+        this._id = id;
+    }
+
+    set isDone(isDone) {
+        this._isDone = isDone;
+    }
+    
+    changeIsDone() {
+        this._isDone = !this._isDone;
     }
 
     toObject() {
