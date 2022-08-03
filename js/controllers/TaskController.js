@@ -118,7 +118,7 @@ export default class TaskController {
     changeTaskIsDone(taskId, callback) {
         const task = this.searchById(taskId);
         task.changeIsDone();
-        this.updateTask(task.toObject())
+        this.updateTask(task.toObject());
 
         if(task.toObject().isDone && confirm('Deseja excluir a tarefa?')) {
             this.deleteTask(task.toObject().id)

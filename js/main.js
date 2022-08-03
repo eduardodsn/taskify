@@ -6,7 +6,7 @@ notify();
 loadCreateAction();
 loadCoreActions();
 
-// Create new task
+// Create new task 
 function loadCreateAction() {
     document.querySelector('#create-to-do-btn').addEventListener('click', (e) => {
         e.preventDefault();
