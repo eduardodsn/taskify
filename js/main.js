@@ -4,9 +4,7 @@ const controller = new TaskController();
 
 notify();
 loadCreateAction();
-loadDeleteAction();
-loadUpdateAction();
-loadCheckAction();
+loadCoreActions();
 
 // Create new task
 function loadCreateAction() {
@@ -17,9 +15,7 @@ function loadCreateAction() {
             controller.addTask(task.toObject());
             controller.clearInputs();
             
-            loadDeleteAction();
-            loadUpdateAction();
-            loadCheckAction();
+            loadCoreActions();
         } 
     });
 }
@@ -32,9 +28,8 @@ function loadDeleteAction() {
         deleteBtn.onclick = () => {
             const taskId = parseInt(deleteBtn.parentElement.parentElement.parentElement.childNodes[1].value);
             controller.deleteTask(taskId);
-            loadDeleteAction();
-            loadUpdateAction();
-            loadCheckAction();
+            
+            loadCoreActions();
         }
     });
 }
@@ -56,9 +51,7 @@ function loadUpdateAction() {
                 updatedTask.isDone = task.toObject().isDone;
                 controller.updateTask(updatedTask.toObject());
 
-                loadUpdateAction(); 
-                loadDeleteAction();
-                loadCheckAction();
+                loadCoreActions();
             };
         }      
     )});
@@ -79,4 +72,10 @@ function loadCheckAction() {
 
 function notify() {
     controller.notify();
+}
+
+function loadCoreActions() {
+    loadDeleteAction();
+    loadUpdateAction();
+    loadCheckAction();
 }
